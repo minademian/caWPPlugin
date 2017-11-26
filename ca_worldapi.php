@@ -9,7 +9,7 @@
  *
  * @link              http://www.ca-world.org
  * @since             0.0.1
- * @package           ca-worldapi
+ * @package           CA_WORLDAPI
  *
  * Plugin Name:  Cocaine Anonymous (CA) World API plugin
  * Plugin URI:   
@@ -27,56 +27,34 @@
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
-define( 'PLUGIN_NAME_VERSION', '0.0.1' );
+define( 'CA_WORLDAPI_VERSION', '0.0.1' );
 
-function caworldapi_setup_post_types()
-{
-    // register the "book" custom post type
-    register_post_type( 'book', ['public' => 'true'] );
+class ca_worldapi {
+	function __construct() {
+register_activation_hook( __FILE__, 'ca_worldapi_install' );
+register_uninstall_hook(__FILE__, 'ca_worldapi_uninstall');
+register_deactivation_hook(__FILE__, 'ca_worldapi_deactivation');
+	// include(plugin_dir_path(__FILE__) . 'inc/wp_location_shortcode.php');
+	// include(plugin_dir_path(__FILE__) . 'inc/wp_location_widget.php');
+	}
+ function run() {
+		echo 'HALLOW';
 }
-add_action( 'init', 'caworldapi_setup_post_type' );
- 
-function caworldapi_install()
+function ca_worldapi_install()
 {
-    // trigger our function that registers the custom post type
-    caworldapi_setup_post_type();
- 
-    // clear the permalinks after the post type has been registered
-    flush_rewrite_rules();
-}
-
-register_activation_hook( __FILE__, 'caworldapi_install' );
-
-function caworldapi_deactivation()
-{
-    // our post type will be automatically removed, so no need to unregister it
- 
-    // clear the permalinks to remove our post type's rules
-    flush_rewrite_rules();
+	echo 'INSTALL!';
 }
 
-function caworldapi_uninstall()
+function ca_worldapi_deactivation()
 {
-    // our post type will be automatically removed, so no need to unregister it
- 
-    // clear the permalinks to remove our post type's rules
-    flush_rewrite_rules();
+	echo 'DEACTIVATE!';
 }
 
-register_uninstall_hook(__FILE__, 'caworldapi_function_to_run');
+function ca_worldapi_uninstall()
+{
+	echo 'UNINSTALL!!!!';
+}
+}
 
-/**
- * Begins execution of the plugin.
- *
- * Since everything within the plugin is registered via hooks,
- * then kicking off the plugin from this point in the file does
- * not affect the page life cycle.
- *
- * @since    1.0.0
- */
-function run_plugin_name() {
 	$plugin = new ca_worldapi();
 	$plugin->run();
-}
-
-run_plugin_name();
