@@ -27,34 +27,47 @@
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
-define( 'CA_WORLDAPI_VERSION', '0.0.1' );
+define('PLUGIN_VERSION', '0.0.1' );
+define('PLUGIN_NAME', 'ca_worldapi');
 
 class ca_worldapi {
 	function __construct() {
-register_activation_hook( __FILE__, 'ca_worldapi_install' );
-register_uninstall_hook(__FILE__, 'ca_worldapi_uninstall');
-register_deactivation_hook(__FILE__, 'ca_worldapi_deactivation');
-	// include(plugin_dir_path(__FILE__) . 'inc/wp_location_shortcode.php');
-	// include(plugin_dir_path(__FILE__) . 'inc/wp_location_widget.php');
+		include(plugin_dir_path(__FILE__) . 'includes/functions.php');
+		register_activation_hook( __FILE__, array( 'ca_worldapi', 'activation'));
+		register_uninstall_hook(__FILE__, array( 'ca_worldapi', 'uninstall'));
+		register_deactivation_hook(__FILE__, array( 'ca_worldapi', 'deactivation'));
+		add_action('admin_menu', 'ca_worldapi_menu');
 	}
- function run() {
-		echo 'HALLOW';
-}
-function ca_worldapi_install()
-{
-	echo 'INSTALL!';
+
+ 	static function run() {
+		error_log('plugin ' . PLUGIN_NAME . ' running!');
+		//$theBody = wp_remote_retrieve_body( wp_remote_get('http://188.166.70.137:8000/') );
+	}
+
+	static function activation() {
+		error_log('AC!');
+	}
+
+	static function deactivation() {
+		error_log('DE!');
+	}
+
+	static function uninstall() {
+		error_log('UNINSTALL!');
+	}
 }
 
-function ca_worldapi_deactivation()
-{
-	echo 'DEACTIVATE!';
+function ca_worldapi_menu() {
+	add_options_page( 'CA World API Options', 'CA World API', 'manage_options', 'caworldapi', 'ca_worldapi_options' );
 }
 
-function ca_worldapi_uninstall()
-{
-	echo 'UNINSTALL!!!!';
+function ca_worldapi_options() {
+	if (!current_user_can( 'manage_options'))  {
+		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+	}
+	echo '<div class="wrap">';
+	echo '<p>HALLOWWWW IM ON THE BOGGGG.</p>';
+	echo '</div>';
 }
-}
-
 	$plugin = new ca_worldapi();
 	$plugin->run();
