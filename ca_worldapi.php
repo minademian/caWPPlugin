@@ -87,6 +87,7 @@ function ca_worldapi_options() {
   <form name="select-country" id="select-country">
 	 <label for="country">Country</label>
    <select name="country" id="country">
+    <option value="">-- none selected</option>
     <option value="se">Sweden</option>
     <option value="us">United States</option>
     <option value="uk">United Kingdom</option>

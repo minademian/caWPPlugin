@@ -99,8 +99,8 @@ public function widget( $args, $instance ) {
     }
 
     //get the output
-    $html = 'Meetings List';
-
+    $html = '<h2>Meetings List</h2>';
+    $html .= "<div><h3>Mina & Gus's happy meeting</h3><p>Hässelby gård, Stockholm, Sweden</p><p><strong>Monday, 19:00, 1hr</strong><h3>Cartmans meeting!</h3><p>Tired of getting FUUUUCKED!</p><p><strong>South Park, Colorado, United States</strong><p>Monday, 19:00, 1hr</p>";
     echo $html;
 }
 }
