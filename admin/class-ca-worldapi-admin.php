@@ -114,8 +114,9 @@ class CA_Worldapi_Admin {
 
 	public function initialize_options() {
   	add_option( 'ca_worldapi_countries_list', '', '', 'yes' );
-		add_option( 'ca_worldapi_active_country', '', '', 'no' );
-		add_option( 'ca_worldapi_country_set', '', '', 'no' );
+		add_option( 'ca_worldapi_active_country', '', '', 'yes' );
+		add_option( 'ca_worldapi_country_set', '', '', 'yes' );
+		add_option( 'ca_worldapi_meetings_list', '', '', 'yes' );
 		return true;
 	}
 
@@ -123,6 +124,7 @@ class CA_Worldapi_Admin {
 		if (isset($_POST["country"])) {
 				update_option('ca_worldapi_active_country', $_POST["country"], '', 'no');
 				update_option('ca_worldapi_country_set', 1, '', 'no');
+				self::retrieve_meetings_list($_POST["country"]);
 				$admin_notice = "success";
 				$this->custom_redirect($admin_notice, $_POST);
 				exit;
@@ -135,8 +137,12 @@ class CA_Worldapi_Admin {
 			}
 	}
 
+  public static function retrieve_meetings_list($code) {
+		return includes\admin\API::persist_meetings_list($code);
+	}
+
 	/**
-	 * Redirect
+	 * custom_redirect
 	 *
 	 * @since    1.0.0
 	 */
@@ -149,7 +155,6 @@ class CA_Worldapi_Admin {
 			)
 		);
 	}
-
 }
 
 class Admin_Helper {

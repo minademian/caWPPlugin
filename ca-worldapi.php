@@ -51,6 +51,7 @@ define( NS . 'PLUGIN_TEXT_DOMAIN', 'ca-worldapi' );
 define( 'API_PROTOCOL', 'http://' );
 define( 'API_HOST', 'localhost:3000' );
 define( 'API_ENDPOINT_COUNTRIES', API_PROTOCOL . API_HOST . '/countries' );
+define( 'API_ENDPOINT_MEETINGS', API_PROTOCOL . API_HOST . '/meetings' );
 
 /**
  * The code that runs during plugin activation.
