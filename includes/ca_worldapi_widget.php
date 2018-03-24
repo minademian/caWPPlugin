@@ -66,7 +66,7 @@ public function __construct() {
         </p>
         <?php
     }
-//handles updating the widget 
+//handles updating the widget
 //$new_instance - new values, $old_instance - old saved values
 public function update($new_instance, $old_instance){
 
@@ -98,9 +98,6 @@ public function widget( $args, $instance ) {
         $arguments['number_of_locations'] = $instance['number_of_locations'];
     }
 
-    //get the output
-    $html = '<h2>Meetings List</h2>';
-    $html .= "<div><h3>Mina & Gus's happy meeting</h3><p>Hässelby gård, Stockholm, Sweden</p><p><strong>Monday, 19:00, 1hr</strong><h3>Cartmans meeting!</h3><p>Tired of getting FUUUUCKED!</p><p><strong>South Park, Colorado, United States</strong><p>Monday, 19:00, 1hr</p>";
-    echo $html;
+    include(plugin_dir_path(__FILE__) . './templates/frontend-widget.php');
 }
 }
