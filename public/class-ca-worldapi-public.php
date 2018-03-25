@@ -102,4 +102,8 @@ class CA_Worldapi_Public {
 
 	}
 
+public function register_ca_worldapi_widgets() {
+    register_widget('Frontend_Widget');
+}
+
 }
