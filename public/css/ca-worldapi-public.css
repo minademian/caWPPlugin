@@ -1,4 +1,78 @@
 /**
- * All of the CSS for your public-facing functionality should be
+ * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+
+.ca-worldapi-meetings-list h2 {font-size: 1.571em} /* 22px */
+.ca-worldapi-meetings-list h3 {font-size: 1.429em} /* 20px */
+.ca-worldapi-meetings-list h4 {font-size: 1.286em} /* 18px */
+.ca-worldapi-meetings-list h5 {font-size: 1.143em} /* 16px */
+.ca-worldapi-meetings-list h6 {font-size: 1em} /* 14px */
+
+h2, h3, h4, h5, h6 {
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: .8em;
+}
+
+.ca-worldapi-meetings-list ol {
+  list-style: outside decimal;
+  margin: 1em 0 1.5em 1.5em;
+}
+
+header, section, footer,
+aside, nav, article, figure {
+  display: block;
+}
+
+section p {
+  font-weight: normal;
+}
+
+footer.meeting-info section p {
+  font-weight: bold;
+}
+
+.hentry {
+  border-bottom: 1px solid #eee;
+  padding: 1.5em 0;
+}
+.ca-worldapi-meetings-list ol li {
+    background: #fff;
+    line-height: 30px;
+}
+
+address {
+  font-style:normal;
+  font-weight: normal;
+}
+
+li:last-child .hentry, #content > .hentry {border: 0; margin: 0;}
+#content > .hentry {padding: 1em 0;}
+
+.entry-title {font-size: 1.429em; margin-bottom: 0;}
+.entry-title a:link, .entry-title a:visited {text-decoration: none;}
+
+.hentry .post-info * {font-style: normal;}
+
+  /* Content */
+  .hentry footer {margin-bottom: 2em;}
+  .hentry footer address {display: inline;}
+  #meetings footer address {display: block;}
+
+  /* Blog Index */
+  #meetings {list-style: none; margin: 0;}
+  #meetings .hentry {padding-left: 200px; position: relative;}
+  #meetings footer {
+    left: 10px;
+    position: absolute;
+    top: 1.5em;
+    width: 190px;
+  }
+#meetings section.meeting-map {
+    right: 10px;
+    position: absolute;
+    top: 1.5em;
+    width: 190px;
+}
+.body {clear: both; margin: 0 auto; width: 800px;}
