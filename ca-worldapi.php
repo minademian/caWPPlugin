@@ -80,11 +80,14 @@ register_deactivation_hook( __FILE__, 'deactivate_ca_worldapi' );
  */
 require plugin_dir_path( __FILE__ ) . 'includes/class-ca-worldapi.php';
 
+require_once plugin_dir_path( __FILE__ ) . 'public/frontend-widget.php';
+
 /**
  * Helper libraries
  */
 require_once plugin_dir_path( __FILE__ ) . 'includes/common/lib-autoloader.php' ;
 require_once plugin_dir_path( __FILE__ ) . 'includes/common/lib-functions.php';
+
 
 /**
  * Begins execution of the plugin.
