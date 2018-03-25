@@ -15,7 +15,7 @@
 <div class="wrap">
 	<h2>CA Meetings</h2>
 	<?php
- 		if (get_option('ca_worldapi_country_set') == false && !isset($_GET)) {
+ 		if (get_option('ca_worldapi_country_set') == '' && !isset($_GET['country-callback'])) {
 			include_once plugin_dir_path(__FILE__) . './ca-worldapi-admin-select-country.php';
 		} else {
 			include_once plugin_dir_path( __FILE__ ) . './ca-worldapi-admin-success-msg.php';

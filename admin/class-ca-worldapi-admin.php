@@ -10,6 +10,7 @@
  * @subpackage ca-worldapi/admin
  * @todo security checks in form post callback
  * @todo nonce in form
+ * @todo switch to api key from ca sweden google account
  */
 
 namespace CA_Worldapi;
@@ -87,21 +88,8 @@ class CA_Worldapi_Admin {
 	 * @since    0.0.2
 	 */
 	public function enqueue_scripts() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in CA_Worldapi_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The CA_Worldapi_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ca-worldapi-admin.js', array( 'jquery' ), $this->version, false );
-
+   	// wp_register_script( 'gmaps', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCL5S4F2fWMgdG_icTgTjG1eEBFEndsk18&callback=initMap', array(), '1.0', true );
+		// wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ca-worldapi-admin.js', array( 'jquery' ), $this->version, false );
 	}
 
   public function menu() {
@@ -122,7 +110,7 @@ class CA_Worldapi_Admin {
 
 	public function set_active_country_callback() {
 		if (isset($_POST["country"])) {
-				update_option('ca_worldapi_active_country', $_POST["country"], '', 'no');
+				update_option('ca_worldapi_active_country', includes\admin\API::code_to_country($_POST['country']), '', 'no');
 				update_option('ca_worldapi_country_set', 1, '', 'no');
 				self::retrieve_meetings_list($_POST["country"]);
 				$admin_notice = "success";

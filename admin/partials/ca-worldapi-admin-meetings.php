@@ -1,3 +1,5 @@
+<section id="content" class="ca-worldapi-meetings-list">
+  <ol id="meetings" class="hfeed">
  <?php
   $meetings = unserialize(get_option('ca_worldapi_meetings_list'));
 
@@ -13,19 +15,27 @@
     $start = date('H:i', strtotime($meeting['when']['time']));
     $end = date('H:i', strtotime($meeting['when']['time']) + $duration * $duration);
  ?>
-<article>
-  <header>
-    <h2><?php echo $name; ?></h2>
-  </header>
-  <section>
-    <p><?php echo $desc; ?></p>
-  </section>
-  <section class="user_reviews">
-    <article class="user_review">
-      <p><time><?php echo $start; ?></time> to <time><?php echo $end; ?></time></p>
+  <li>
+  <article class="hentry">
+    <header>
+      <h2><?php echo $name; ?></h2>
+    </header>
+    <section>
+      <p><?php echo $desc; ?></p>
+    </section>
+    <section class="meeting-map">
+      <div id="map">
+        map will be shown here
+      </div>
+    </section>
+    <footer class="meeting-info">
+      <section>
+        <p><time><?php echo $start; ?></time> - <time><?php echo $end; ?></time></p>
+      </section>
       <address><?php echo $address; ?></address>
-    </article>
-</article>
+    </footer>
+  </article>
+  </li>
  <?php
   }
   } else {
@@ -34,3 +44,5 @@
   <?php
   }
   ?>
+  </ol>
+</section>
