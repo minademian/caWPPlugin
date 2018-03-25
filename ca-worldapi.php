@@ -49,8 +49,9 @@ define( NS . 'PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 define( NS . 'PLUGIN_TEXT_DOMAIN', 'ca-worldapi' );
 
 define( 'API_PROTOCOL', 'http://' );
-define( 'API_HOST', 'localhost:3000' );
-define( 'API_ENDPOINT_COUNTRIES', API_PROTOCOL . API_HOST . '/countries' );
+define( 'API_HOST', '159.65.30.176' );
+define( 'API_HOST_LOCAL', 'localhost:3000' );
+define( 'API_ENDPOINT_COUNTRIES', API_PROTOCOL . API_HOST_LOCAL . '/countries' );
 define( 'API_ENDPOINT_MEETINGS', API_PROTOCOL . API_HOST . '/meetings' );
 
 /**
