@@ -30,7 +30,12 @@ class API {
    */
   public static function persist_countries_list() {
   	if (!get_option('ca_worldapi_countries_list')) {
-  		update_option('ca_worldapi_countries_list', self::retrieve_countries_list(), '', 'yes');
+      $countries = self::retrieve_countries_list();
+      if ($countries !== false) {
+  		  update_option('ca_worldapi_countries_list', $countries, '', 'yes');
+      } else {
+        return false;
+      }
   	} else {
   		// if (!get_option('ca_worldapi_active_country')) {
   		// 	update_option('ca_worldapi_country_set', false, '', 'yes');
@@ -41,7 +46,12 @@ class API {
 
   public static function persist_meetings_list($countrycode) {
     if (!get_option('ca_worldapi_meetings_list')) {
-      update_option('ca_worldapi_meetings_list', self::retrieve_meetings_list($countrycode), '', 'yes' );
+      $meetings = self::retrieve_meetings_list($countrycode);
+      if ($meetings !== false) {
+        update_option('ca_worldapi_meetings_list', $meetings, '', 'yes' );
+      } else {
+        return false;
+      }
     }
   }
 
@@ -101,7 +111,7 @@ class API {
   /*
    * Helper functions
    */
-  private static function code_to_country($code) {
+  public static function code_to_country($code) {
 		/**
 		 * This function is temporary until changes are made to the API.
 		 */
