@@ -17,7 +17,7 @@ if (!function_exists('debugvar')) {
             if ( is_array( $log ) || is_object( $log ) ) {
                 echo '<pre>';print_r( $log );echo '</pre>';
             } else {
-                error_log( $log );
+                echo '<pre>';var_dump( $log );echo '</pre>';
             }
         }
     }
