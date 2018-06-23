@@ -3,11 +3,13 @@
  <?php
   $meetings = unserialize(get_option('ca_worldapi_meetings_list'));
 
+  $address_format = "%s, %s";
   if (is_array($meetings) && count($meetings) > 0) {
 	 foreach($meetings as $key=>$meeting) {
     $name = $meeting['name'];
     $desc = $meeting['description'];
-    $address = $meeting['adress'];
+
+    $address = sprintf($address_format, $meeting['street'], $meeting['formatted_address']);
 
     $duration = $meeting['when']['duration'];
 

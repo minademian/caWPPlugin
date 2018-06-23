@@ -8,13 +8,13 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              
+ * @link
  * @since             0.0.2
  * @package           ca-worldapi
  *
  * @wordpress-plugin
  * Plugin Name:       ca-worldapi
- * Plugin URI:        
+ * Plugin URI:
  * Description:       allows fellowship websites to access and display the data from the World API
  * Version:           0.0.2
  * Author:            Mina Demian
@@ -48,11 +48,12 @@ define( NS . 'PLUGIN_NAME_URL', plugin_dir_url( __FILE__ ) );
 define( NS . 'PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 define( NS . 'PLUGIN_TEXT_DOMAIN', 'ca-worldapi' );
 
-define( 'API_PROTOCOL', 'http://' );
-define( 'API_HOST', '159.65.30.176' );
-define( 'API_HOST_LOCAL', 'localhost:3000' );
-define( 'API_ENDPOINT_COUNTRIES', API_PROTOCOL . API_HOST_LOCAL . '/countries' );
-define( 'API_ENDPOINT_MEETINGS', API_PROTOCOL . API_HOST . '/meetings' );
+define('API_PROTOCOL', 'http://');
+// define('API_HOST', '159.65.30.176');
+define('API_HOST', 'localhost:3000');
+define('COUNTRIES_ENDPOINT', '/countries');
+define('MEETINGS_ENDPOINT', '/meetings');
+define('API_URI', API_PROTOCOL . API_HOST);
 
 /**
  * The code that runs during plugin activation.
@@ -89,7 +90,6 @@ require_once plugin_dir_path( __FILE__ ) . 'public/frontend-widget.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/common/lib-autoloader.php' ;
 require_once plugin_dir_path( __FILE__ ) . 'includes/common/lib-functions.php';
 
-
 /**
  * Begins execution of the plugin.
  *
@@ -103,6 +103,7 @@ function run_ca_worldapi() {
 
 	$plugin = new CA_Worldapi();
 	$plugin->run();
-
+	write_log('Running plugin...');
 }
+
 run_ca_worldapi();

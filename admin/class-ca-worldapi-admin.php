@@ -45,6 +45,8 @@ class CA_Worldapi_Admin {
 	 */
 	private $version;
 
+	private $locations;
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -57,6 +59,10 @@ class CA_Worldapi_Admin {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
+	}
+
+	public function show_stored_locations() {
+		return $this->locations;
 	}
 
 	/**
@@ -96,23 +102,75 @@ class CA_Worldapi_Admin {
 		add_options_page( 'CA Meetings', 'CA Meetings', 'manage_options', 'ca-worldapi', array(new Admin_Helper, "options") );
 	}
 
-	public function retrieve_countries_list() {
-		return includes\admin\API::persist_countries_list();
+	public function prepare_api_connection() {
+		includes\admin\API::initialize_connection();
 	}
 
 	public function initialize_options() {
-  	add_option( 'ca_worldapi_countries_list', '', '', 'yes' );
+  	add_option( 'ca_worldapi_locations', '', '', 'yes' );
+		add_option( 'ca_worldapi_active_region', '', '', 'yes' );
 		add_option( 'ca_worldapi_active_country', '', '', 'yes' );
 		add_option( 'ca_worldapi_country_set', '', '', 'yes' );
 		add_option( 'ca_worldapi_meetings_list', '', '', 'yes' );
 		return true;
 	}
 
+	public function get_locations() {
+		$list = includes\admin\API::retrieve_locations();
+		if (is_wp_error($list)) {
+			wp_die( __( $list->get_error_message() ) );
+		} elseif (is_bool($list) == true) {
+			wp_die( __( 'No country data returned from API.' ) );
+		} else {
+			$this->persist_locations($list);
+		}
+	}
+
+	public function persist_locations($list) {
+  	if (!get_option('ca_worldapi_locations')) {
+  		  update_option('ca_worldapi_locations', serialize($list), '', 'yes');
+      } else {
+        return false;
+      }
+  }
+
+	public function display_locations($list) {
+  	$list = unserialize(get_option('ca_worldapi_locations'));
+  	$this->locations = includes\admin\API_Parser::convert($list);
+	}
+
+	public function get_meetings($country) {
+		$list = includes\admin\API::retrieve_meetings($country);
+		if (is_wp_error($list)) {
+			wp_die( __( $list->get_error_message() ) );
+		} elseif (is_bool($list) == true) {
+			wp_die( __( 'No meetings data returned from API.' ) );
+		} else {
+			write_log('Retrieved list of meetings for ' . $country);
+			$this->persist_meetings($list);
+		}
+	}
+
+	public function persist_meetings($list) {
+  	if (!get_option('ca_worldapi_meetings_list')) {
+  		  update_option('ca_worldapi_meetings_list', serialize($list), '', 'yes');
+				write_log('Persisted list of meetings!');
+      } else {
+        return false;
+      }
+  }
+
 	public function set_active_country_callback() {
 		if (isset($_POST["country"])) {
-				update_option('ca_worldapi_active_country', includes\admin\API::code_to_country($_POST['country']), '', 'no');
+				$location = explode('|', $_POST["country"]);
+				list($region, $country) = $location;
+
 				update_option('ca_worldapi_country_set', 1, '', 'no');
-				self::retrieve_meetings_list($_POST["country"]);
+				update_option('ca_worldapi_active_region', $region, '', 'no');
+				update_option('ca_worldapi_active_country', $country, '', 'no');
+
+				$this->get_meetings($country);
+
 				$admin_notice = "success";
 				$this->custom_redirect($admin_notice, $_POST);
 				exit;
@@ -123,10 +181,6 @@ class CA_Worldapi_Admin {
 							'back_link' => 'admin.php?page=' . $this->plugin_name,
 					) );
 			}
-	}
-
-  public static function retrieve_meetings_list($code) {
-		return includes\admin\API::persist_meetings_list($code);
 	}
 
 	/**

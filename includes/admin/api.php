@@ -3,7 +3,7 @@
 /**
  * Fired during plugin activation
  *
- * @link       
+ * @link
  * @since      0.0.2
  *
  * @package    ca-worldapi
@@ -24,103 +24,50 @@ namespace CA_Worldapi\includes\admin;
  */
 class API {
 
+  protected static $countries;
+  protected static $countries_endpoint;
+  protected static $meetings_endpoint;
+
   /*
    * Public methods
    *
    */
-  public static function persist_countries_list() {
-  	if (!get_option('ca_worldapi_countries_list')) {
-      $countries = self::retrieve_countries_list();
-      if ($countries !== false) {
-  		  update_option('ca_worldapi_countries_list', $countries, '', 'yes');
-      } else {
-        return false;
-      }
-  	} else {
-  		// if (!get_option('ca_worldapi_active_country')) {
-  		// 	update_option('ca_worldapi_country_set', false, '', 'yes');
-  		// 	write_log('no active country set.');
-  		// }
-  	}
+  public static function initialize_connection() {
+    $url = '%s%s';
+    API::$countries_endpoint = sprintf($url, API_URI, COUNTRIES_ENDPOINT);
+    API::$meetings_endpoint = sprintf($url, API_URI, MEETINGS_ENDPOINT);
   }
 
-  public static function persist_meetings_list($countrycode) {
-    if (!get_option('ca_worldapi_meetings_list')) {
-      $meetings = self::retrieve_meetings_list($countrycode);
-      if ($meetings !== false) {
-        update_option('ca_worldapi_meetings_list', $meetings, '', 'yes' );
-      } else {
-        return false;
-      }
-    }
-  }
-
-  /*
-   * Private methods
-   */
-
-  private static function retrieve_countries_list() {
-  	if ( defined( 'API_PROTOCOL' ) ) {
-  		$request = wp_remote_get(API_ENDPOINT_COUNTRIES);
-
+  public static function retrieve_locations() {
+  	$request = wp_remote_get(API::$countries_endpoint);
   		if (is_wp_error($request)) {
-  			return false;
+  			return $request;
   		}
 
   		$body = wp_remote_retrieve_body($request);
   		$data = json_decode($body, true);
 
-  		if (!empty($data)) return serialize($data);
-  		else return false;
-  	}
+  		if (!empty($data)) return $data;
+  		else {
+        return false;
+      }
   }
 
-  private static function retrieve_meetings_list($code) {
-  	if ( defined( 'API_PROTOCOL' ) ) {
-  		$request = wp_remote_get(API_ENDPOINT_MEETINGS);
-
+  public static function retrieve_meetings($country) {
+  	$request = wp_remote_get(API::$meetings_endpoint);
   		if (is_wp_error($request)) {
-  			return false;
+  			return $request;
   		}
 
   		$body = wp_remote_retrieve_body($request);
-  		$data = self::filter_data(json_decode($body, true), $code);
-
-  		if (!empty($data)) return serialize($data);
-  		else return false;
-  	}
-  }
-
-  private static function filter_data($data, $code) {
-    $result = array();
-
-    $country = self::code_to_country($code);
-
-    if ($country != false) {
-      foreach ($data as $key => $value){
-        if ($value['area'] == self::code_to_country($code)) {
-            $result[] = $value;
-        }
+  		$data = json_decode($body, true);
+      foreach ($data as $key => $array) {
+        if ($array['area'] == $country) $filtered[] = $array;
       }
-      return $result;
-    } else {
-      return false;
-    }
-  }
 
-  /*
-   * Helper functions
-   */
-  public static function code_to_country($code) {
-		/**
-		 * This function is temporary until changes are made to the API.
-		 */
-		$dictionary = array(
-      'se' => 'Sweden',
-      'gb' => 'United Kingdom',
-      'us' => 'United States',
-      'nl' => 'Netherlands'
-    );
-    return (array_key_exists($code, $dictionary)) ? $dictionary[$code] : FALSE;
+  		if (!empty($filtered)) return $filtered;
+  		else {
+        return false;
+      }
   }
 }

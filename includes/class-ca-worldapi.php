@@ -159,8 +159,9 @@ class CA_Worldapi {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
-		$this->loader->add_action( 'admin_init', $plugin_admin, 'initialize_options');
-    $this->loader->add_action( 'admin_init', $plugin_admin, 'retrieve_countries_list');
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'prepare_api_connection'); write_log('API connected...');
+    $this->loader->add_action( 'admin_init', $plugin_admin, 'initialize_options'); write_log('Initialized options...');
+    $this->loader->add_action( 'admin_init', $plugin_admin, 'get_locations'); write_log('Retrieved list of locations...');
 
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'menu' );
 		$this->loader->add_action( 'admin_post_country-callback', $plugin_admin, 'set_active_country_callback' );
