@@ -1,0 +1,16 @@
+{
+  "name": "ca-worldapi",
+  "version": "0.0.2",
+  "description": "some helper apps for development",
+  "main": "index.js",
+  "dependencies": {
+    "json-server": "^0.12.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "api": "json-server --watch ./mock-api/db.json"
+  },
+  "author": "Mina Demian",
+  "license": "ISC"
+}
