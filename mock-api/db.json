@@ -1,0 +1,343 @@
+{
+  "meetings":[
+    {
+        "name": "Powerless and Sober",
+        "description": "AA Big Book study meeting",
+        "country": "Kenya",
+        "city": "Nairobi",
+        "street": "1 Musindi Rd",
+        "formatted_address": "Nairobi, Kenya",
+        "longlat": "(-1.2920659, 36.82194619999996)",
+        "when": {
+            "day": "Thursday",
+            "time": "19:00:00",
+            "duration": "60"
+        },
+        "pk": 3,
+        "region": "Europe",
+        "area": "Alaska"
+    },
+    {
+        "name": "Powerless and Sober",
+        "description": "AA Big Book study meeting",
+        "country": "Kenya",
+        "city": "Nairobi",
+        "street": "1 Musindi Rd",
+        "formatted_address": "Nairobi, Kenya",
+        "longlat": "(-1.2920659, 36.82194619999996)",
+        "when": {
+            "day": "Thursday",
+            "time": "19:00:00",
+            "duration": "60"
+        },
+        "pk": 3,
+        "region": "Europe",
+        "area": "South Africa"
+    },
+    {
+        "name": "Happy Family",
+        "description": "all friends and family of those in recovery are welcome",
+        "country": "Kenya",
+        "city": "Nairobi",
+        "street": "150 Kirinyaga Rd",
+        "formatted_address": "150 Kirinyaga Rd, Nairobi, Kenya",
+        "longlat": "(-1.2811983, 36.82857349999995)",
+        "when": {
+            "day": "Wednesday",
+            "time": "19:00:00",
+            "duration": "60"
+        },
+        "pk": 2,
+        "region": "Europe",
+        "area": "South Africa"
+    },
+    {
+        "name": "Home Room",
+        "description": "first CA group in Kenya",
+        "country": "Kenya",
+        "city": "Nairobi",
+        "street": "10 Pumwani Rd",
+        "formatted_address": "Kabiro Road, Off Macharia Road, Nairobi, Kenya",
+        "longlat": "(-1.2883773, 36.752624999999966)",
+        "when": {
+            "day": "Monday",
+            "time": "18:30:00",
+            "duration": "60"
+        },
+        "pk": 1,
+        "region": "Europe",
+        "area": "South Africa"
+    }
+  ],
+  "countries": [
+    {
+        "region_name": "Pacific North",
+        "areas": [
+            {
+                "area_name": "Alaska"
+            },
+            {
+                "area_name": "British Columbia"
+            },
+            {
+                "area_name": "Idaho"
+            },
+            {
+                "area_name": "Northern Alberta"
+            },
+            {
+                "area_name": "Northern California"
+            },
+            {
+                "area_name": "Northern Nevada"
+            },
+            {
+                "area_name": "Oregon/Southwest Washington"
+            },
+            {
+                "area_name": "Southern Alberta"
+            },
+            {
+                "area_name": "Utah"
+            },
+            {
+                "area_name": "Washington"
+            }
+        ]
+    },
+    {
+        "region_name": "Pacific South Region",
+        "areas": [
+            {
+                "area_name": "Antilope Valley"
+            },
+            {
+                "area_name": "Hawaii"
+            },
+            {
+                "area_name": "Nevada"
+            },
+            {
+                "area_name": "Online"
+            },
+            {
+                "area_name": "Central California"
+            },
+            {
+                "area_name": "Inland Empire"
+            },
+            {
+                "area_name": "Los Angeles"
+            },
+            {
+                "area_name": "Orange County"
+            },
+            {
+                "area_name": "San Diego"
+            },
+            {
+                "area_name": "San Fernando Valley"
+            },
+            {
+                "area_name": "San Gabriel/Pomona Valley"
+            },
+            {
+                "area_name": "Southern Nevada"
+            },
+            {
+                "area_name": "West Inland"
+            }
+        ]
+    },
+    {
+        "region_name": "Atlantic South Region",
+        "areas": [
+            {
+                "area_name": "Alabama"
+            },
+            {
+                "area_name": "Arkansas"
+            },
+            {
+                "area_name": "Florida"
+            },
+            {
+                "area_name": "Georgia"
+            },
+            {
+                "area_name": "North Carolina"
+            },
+            {
+                "area_name": "Louisiana"
+            },
+            {
+                "area_name": "Tennessee"
+            },
+            {
+                "area_name": "South Carolina"
+            },
+            {
+                "area_name": "Virginia"
+            },
+            {
+                "area_name": "Peru"
+            }
+        ]
+    },
+    {
+        "region_name": "Atlantic North",
+        "areas": [
+            {
+                "area_name": "Canadian Maritimes"
+            },
+            {
+                "area_name": "Conneticut"
+            },
+            {
+                "area_name": "Massachusetts"
+            },
+            {
+                "area_name": "New York"
+            },
+            {
+                "area_name": "Northern New England"
+            },
+            {
+                "area_name": "Eastern Pennsylvania"
+            },
+            {
+                "area_name": "Quebec"
+            },
+            {
+                "area_name": "Rhode Island"
+            },
+            {
+                "area_name": "Southern Ontario"
+            },
+            {
+                "area_name": "Washington, D.C."
+            }
+        ]
+    },
+    {
+        "region_name": "MidWest",
+        "areas": [
+            {
+                "area_name": "Illinois"
+            },
+            {
+                "area_name": "Indiana"
+            },
+            {
+                "area_name": "Kentucky"
+            },
+            {
+                "area_name": "Manitoba"
+            },
+            {
+                "area_name": "Michigan"
+            },
+            {
+                "area_name": "Minnesota"
+            },
+            {
+                "area_name": "Missouri"
+            },
+            {
+                "area_name": "Nebraska"
+            },
+            {
+                "area_name": "Ohio"
+            },
+            {
+                "area_name": "Wisconsin"
+            }
+        ]
+    },
+    {
+        "region_name": "South West",
+        "areas": [
+            {
+                "area_name": "Arizona"
+            },
+            {
+                "area_name": "Colorado"
+            },
+            {
+                "area_name": "Kansas"
+            },
+            {
+                "area_name": "New Mexico"
+            },
+            {
+                "area_name": "Oklahoma"
+            },
+            {
+                "area_name": "North Texas"
+            },
+            {
+                "area_name": "Texas"
+            },
+            {
+                "area_name": "South Central Texas"
+            },
+            {
+                "area_name": "Southern Colorado"
+            },
+            {
+                "area_name": "Valley Area of Texas"
+            }
+        ]
+    },
+    {
+        "region_name": "Europe",
+        "areas": [
+            {
+                "area_name": "UK"
+            },
+            {
+                "area_name": "London"
+            },
+            {
+                "area_name": "Central"
+            },
+            {
+                "area_name": "Ireland"
+            },
+            {
+                "area_name": "Scotland"
+            },
+            {
+                "area_name": "Netherlands"
+            },
+            {
+                "area_name": "Germany"
+            },
+            {
+                "area_name": "Switzerland"
+            },
+            {
+                "area_name": "Spain"
+            },
+            {
+                "area_name": "Russia"
+            },
+            {
+                "area_name": "Sweden"
+            },
+            {
+                "area_name": "Denmark"
+            },
+            {
+                "area_name": "Hong Kong"
+            },
+            {
+                "area_name": "South Africa"
+            },
+            {
+                "area_name": "Kenya"
+            }
+        ]
+    }
+]
+}
