@@ -156,8 +156,9 @@ class CA_Worldapi {
 
 		$plugin_admin = new CA_Worldapi_Admin( $this->get_plugin_name(), $this->get_version() );
 
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'include_custom_jquery' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'include_openlayers' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'prepare_api_connection'); write_log('API connected...');
     $this->loader->add_action( 'admin_init', $plugin_admin, 'initialize_options'); write_log('Initialized options...');
@@ -177,6 +178,9 @@ class CA_Worldapi {
 	private function define_public_hooks() {
 
 		$plugin_public = new CA_Worldapi_Public( $this->get_plugin_name(), $this->get_version() );
+
+		// $this->loader->add_action( 'wp_enqueue_scripts', $plugin_admin, 'include_custom_jquery' );
+		// $this->loader->add_action( 'wp_enqueue_scripts', $plugin_admin, 'include_openlayers' );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );

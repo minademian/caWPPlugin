@@ -71,22 +71,19 @@ class CA_Worldapi_Admin {
 	 * @since    0.0.2
 	 */
 	public function enqueue_styles() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in CA_Worldapi_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The CA_Worldapi_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/ca-worldapi-admin.css', array(), $this->version, 'all' );
 
 	}
+
+		// include custom jQuery
+		public function include_custom_jquery() {
+			wp_deregister_script('jquery');
+			wp_enqueue_script('jquery', '//code.jquery.com/jquery-1.8.3.min.js', array(), null, true);
+		}
+
+		public function include_openlayers() {
+		  wp_enqueue_script('openlayers', '//www.openlayers.org/api/OpenLayers.js', array('jquery'), null, false );
+		}
 
 	/**
 	 * Register the JavaScript for the admin area.
@@ -94,8 +91,7 @@ class CA_Worldapi_Admin {
 	 * @since    0.0.2
 	 */
 	public function enqueue_scripts() {
-   	// wp_register_script( 'gmaps', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCL5S4F2fWMgdG_icTgTjG1eEBFEndsk18&callback=initMap', array(), '1.0', true );
-		// wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ca-worldapi-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ca-worldapi-admin.js', array( 'jquery' ), $this->version, false );
 	}
 
   public function menu() {
@@ -116,13 +112,17 @@ class CA_Worldapi_Admin {
 	}
 
 	public function get_locations() {
-		$list = includes\admin\API::retrieve_locations();
-		if (is_wp_error($list)) {
-			wp_die( __( $list->get_error_message() ) );
-		} elseif (is_bool($list) == true) {
-			wp_die( __( 'No country data returned from API.' ) );
+		if (!get_option('ca_worldapi_meetings_list')) {
+			$list = includes\admin\API::retrieve_locations();
+			if (is_wp_error($list)) {
+				wp_die( __( $list->get_error_message() ) );
+			} elseif (is_bool($list) == true) {
+				wp_die( __( 'No country data returned from API.' ) );
+			} else {
+				$this->persist_locations($list);
+			}
 		} else {
-			$this->persist_locations($list);
+			return true;
 		}
 	}
 
@@ -162,25 +162,25 @@ class CA_Worldapi_Admin {
 
 	public function set_active_country_callback() {
 		if (isset($_POST["country"])) {
-				$location = explode('|', $_POST["country"]);
-				list($region, $country) = $location;
+			$location = explode('|', $_POST["country"]);
+			list($region, $country) = $location;
 
-				update_option('ca_worldapi_country_set', 1, '', 'no');
-				update_option('ca_worldapi_active_region', $region, '', 'no');
-				update_option('ca_worldapi_active_country', $country, '', 'no');
+			update_option('ca_worldapi_country_set', 1, '', 'no');
+			update_option('ca_worldapi_active_region', $region, '', 'no');
+			update_option('ca_worldapi_active_country', $country, '', 'no');
 
-				$this->get_meetings($country);
+			$this->get_meetings($country);
 
-				$admin_notice = "success";
-				$this->custom_redirect($admin_notice, $_POST);
-				exit;
-			}
-			else {
-				wp_die( __( 'Invalid nonce specified', $this->plugin_name ), __( 'Error', $this->plugin_name ), array(
-							'response' 	=> 403,
-							'back_link' => 'admin.php?page=' . $this->plugin_name,
-					) );
-			}
+			$admin_notice = "success";
+			$this->custom_redirect($admin_notice, $_POST);
+			exit;
+		}
+		else {
+			wp_die( __( 'Invalid nonce specified', $this->plugin_name ), __( 'Error', $this->plugin_name ), array(
+				'response' 	=> 403,
+				'back_link' => 'admin.php?page=' . $this->plugin_name,
+			) );
+		}
 	}
 
 	/**

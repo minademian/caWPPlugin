@@ -50,60 +50,29 @@ class CA_Worldapi_Public {
 	 * @param      string    $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
-
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-
 	}
 
-	/**
-	 * Register the stylesheets for the public-facing side of the site.
-	 *
-	 * @since    1.0.0
-	 */
 	public function enqueue_styles() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Plugin_Name_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Plugin_Name_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/ca-worldapi-public.css', array(), $this->version, 'all' );
-
 	}
 
-	/**
-	 * Register the JavaScript for the public-facing side of the site.
-	 *
-	 * @since    1.0.0
-	 */
+	// public function include_custom_jquery() {
+	// 	wp_deregister_script('jquery');
+	// 	wp_enqueue_script('jquery', '//code.jquery.com/jquery-1.8.3.min.js', array(), null, true);
+	// }
+	// 
+	// public function include_openlayers() {
+	//   wp_enqueue_script('openlayers', '//www.openlayers.org/api/OpenLayers.js', array('jquery'), null, false );
+	// }
+
 	public function enqueue_scripts() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Plugin_Name_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Plugin_Name_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ca-worldapi-public.js', array( 'jquery' ), $this->version, false );
 
 	}
 
-public function register_ca_worldapi_widgets() {
-    register_widget('Frontend_Widget');
-}
-
+	public function register_ca_worldapi_widgets() {
+	    register_widget('Frontend_Widget');
+	}
 }
